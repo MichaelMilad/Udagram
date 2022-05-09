@@ -1,5 +1,11 @@
 
 {
-    "scripts": {},
+    "scripts": {
+        "install:backend": "cd udagram-api && npm install --force",
+        "install:frontend": "cd udagram-frontend && npm install --force",
+        "build:backend": "cd udagram-api && npm run build",
+        "build:frontend": "cd udagram-frontend && npm run build",
+        "start": ""
+    },
     "devDependencies": {}
 }

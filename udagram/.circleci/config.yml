@@ -6,9 +6,6 @@ orbs:
   # different jobs are calles later in the workflows sections
 jobs:
   build:
-    docker:
-      # the base image can run most needed actions with orbs
-      - image: "cimg/base:stable"
     steps:
       - node/install
       - checkout
@@ -30,10 +27,6 @@ jobs:
           name: Building Frontend
           command: |
             npm run frontend:build
-      - run:
-          name: Deploying Frontend
-          command: |
-            npm run frontend:deploy
       - run: 
           name: Afterall
           command: echo "All-Done"
