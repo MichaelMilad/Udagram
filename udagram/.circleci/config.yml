@@ -1,0 +1,40 @@
+version: 2.1
+orbs:
+  # orgs contain basc recipes and reproducible actions (install node, aws, etc.)
+  node: circleci/node@4.1.0
+  aws-cli: circleci/aws-cli@1.3.1
+  # different jobs are calles later in the workflows sections
+jobs:
+  build:
+    docker:
+      # the base image can run most needed actions with orbs
+      - image: "cimg/base:stable"
+    steps:
+      - node/install
+      - checkout
+      - aws-cli/setup
+      # install dependencies in both apps
+      - run:
+          name: Installing Backend
+          command: |
+            npm run backend:install
+      - run:
+          name: Installing Frontend
+          command: |
+            npm run frontend:install
+      - run:
+          name: Building Backend
+          command: |
+            cd reactnd-contacts-server && npm run build
+      - run:
+          name: Building Frontend
+          command: |
+            npm run frontend:build
+      - run:
+          name: Deploying Frontend
+          command: |
+            npm run frontend:deploy
+      - run: 
+          name: Afterall
+          command: echo "All-Done"
+
