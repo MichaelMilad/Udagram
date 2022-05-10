@@ -34,7 +34,7 @@ jobs:
       - run:
           name: Deploying Frontend
           command: |
-            npm run frontend:build
+            npm run frontend:deploy
       - run:
           name: Afterall
           command: echo "All-Done"
