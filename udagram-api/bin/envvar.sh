@@ -1,0 +1,1 @@
+eb setenv TEST_ENV=$TEST_ENV
