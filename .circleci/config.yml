@@ -17,26 +17,14 @@ jobs:
       - aws-cli/setup
       - eb/setup
       # install dependencies in both apps
-      - restore_cache:
-          key: v1-deps-{{ checksum "udagram-api/package-lock.json" }}
       - run:
           name: Installing Backend
           command: |
             npm run backend:install
-      - save_cache:
-          key: v1-deps-{{ checksum "udagram-api/package-lock.json" }}
-          paths: 
-            - udagram-api/node_modules   
-      - restore_cache:
-          key: v1-deps-{{ checksum "udagram-frontend/package-lock.json" }}
       - run:
           name: Installing Frontend
           command: |
             npm run frontend:install
-      - save_cache:
-          key: v1-deps-{{ checksum "udagram-frontend/package-lock.json" }}
-          paths: 
-            - udagram-frontend/node_modules  
       - run:
           name: Building Backend
           command: |
@@ -49,10 +37,6 @@ jobs:
           name: Deploying Frontend
           command: |
             npm run frontend:deploy
-      - run:
-          name: Deploying Backend
-          command: |
-            npm run backend:deploy
       - run:
           name: Afterall
           command: echo "All-Done"
