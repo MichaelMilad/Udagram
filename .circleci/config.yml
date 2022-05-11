@@ -38,6 +38,10 @@ jobs:
           command: |
             npm run frontend:deploy
       - run:
+          name: Deploying Backend
+          command: |
+            npm run backend:deploy
+      - run:
           name: Afterall
           command: echo "All-Done"
 
